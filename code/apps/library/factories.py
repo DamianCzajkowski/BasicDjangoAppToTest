@@ -16,7 +16,7 @@ class AuthorFactory(factory.Factory):
     class Meta:
         model = models.Author
 
-    name = FuzzyText(max_length=200)
+    name = FuzzyText(length=10, prefix='author_')
     email = factory.Sequence(lambda n: 'person{}@example.com'.format(n))
 
 
@@ -24,12 +24,12 @@ class EntryFactory(factory.Factory):
     class Meta:
         model = models.Entry
 
-    blog = BlogFactory
+    blog = factory.SubFactory(BlogFactory)
     headline = FuzzyText(length=120)
     body_text = factory.Faker('random_text')
     pub_date = FuzzyDate(datetime.date(2008, 1, 1))
     mod_date = FuzzyDate(datetime.date(2008, 1, 1))
-    authors = AuthorFactory
+    authors = factory.SubFactory(AuthorFactory)
     number_of_comments = factory.Faker('random_int')
     number_of_pingbacks = factory.Faker('random_int')
     rating = factory.Faker('random_int')
