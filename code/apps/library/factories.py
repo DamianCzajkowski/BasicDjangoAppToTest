@@ -26,10 +26,9 @@ class EntryFactory(factory.Factory):
 
     blog = factory.SubFactory(BlogFactory)
     headline = FuzzyText(length=120)
-    body_text = factory.Faker('random_text')
+    body_text = FuzzyText(length=120)
     pub_date = FuzzyDate(datetime.date(2008, 1, 1))
     mod_date = FuzzyDate(datetime.date(2008, 1, 1))
-    authors = factory.SubFactory(AuthorFactory)
     number_of_comments = factory.Faker('random_int')
     number_of_pingbacks = factory.Faker('random_int')
     rating = factory.Faker('random_int')
